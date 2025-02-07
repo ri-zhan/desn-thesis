@@ -9,6 +9,14 @@ public class PlayerMovement : MonoBehaviour
 
     public float groundDrag;
 
+    public float jumpForce;
+    public float jumpCoolDown;
+    public float airMultiplier;
+    bool readyToJump;
+
+    [Header("Movement")]
+    public KeyCode jumpKey = KeyCode.Space;
+
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
@@ -64,6 +72,17 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        // check if jump key is pressed to jump
+        if(Input.GetKey(jumpKey) && readyToJump && grounded) 
+        {
+            readyToJump = false;
+
+            Jump();
+
+            // jumpCoolDown for delay
+            Invoke(nameof(resetJump), jumpCoolDown);
+        } 
     }
 
     private void MovePlayer() 
@@ -71,8 +90,13 @@ public class PlayerMovement : MonoBehaviour
         // calculate movement direction, always walk in direction you're looking
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        // add force to player
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        // if on ground (add force to player)
+        if(grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        // if not on ground and in air (change air control)
+        else if(!grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
     private void SpeedControl() 
@@ -87,5 +111,19 @@ public class PlayerMovement : MonoBehaviour
             // then apply it;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
+    }
+
+    private void Jump()
+    {
+        // reset y velocity
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+        // apply force in the upwards direction, use forcemode impulse because force is only applied once
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void resetJump() 
+    {
+        readyToJump = true;
     }
 }
