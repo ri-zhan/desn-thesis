@@ -14,8 +14,10 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;
     bool readyToJump;
 
+
     [Header("Movement")]
     public KeyCode jumpKey = KeyCode.Space;
+
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -23,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     bool grounded;
 
     public Transform orientation;
+
 
     // Keyboard inputs
     float horizontalInput;
@@ -39,8 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
         // free rotation, otherwise play falls over
         rb.freezeRotation = true;
-    }
 
+        readyToJump = true;
+    }
 
 
     // Input function for keyboard inputs
@@ -61,6 +65,10 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.linearDamping = 0;
 
+
+        Debug.Log(grounded);
+        if (Input.GetKey(jumpKey))
+                Debug.Log(jumpKey);
     }
     
     private void FixedUpdate() 
@@ -81,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
             Jump();
 
             // jumpCoolDown for delay
-            Invoke(nameof(resetJump), jumpCoolDown);
+            Invoke(nameof(ResetJump), jumpCoolDown);
         } 
     }
 
@@ -122,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
-    private void resetJump() 
+    private void ResetJump() 
     {
         readyToJump = true;
     }
