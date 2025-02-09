@@ -64,11 +64,6 @@ public class PlayerMovement : MonoBehaviour
             rb.linearDamping = groundDrag;
         else
             rb.linearDamping = 0;
-
-
-        Debug.Log(grounded);
-        if (Input.GetKey(jumpKey))
-                Debug.Log(jumpKey);
     }
     
     private void FixedUpdate() 
