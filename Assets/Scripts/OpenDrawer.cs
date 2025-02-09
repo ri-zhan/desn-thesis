@@ -4,54 +4,63 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class OpenBox : MonoBehaviour
+public class OpenDrawer : MonoBehaviour
 {
 
     [Header("Movement")]
-    // movement speed
-    public float openDistance = 2.1f;
-    public float moveSpeed = 1f;
+    public float openDistance = 0.1f;
+    public float openTime = 1f;
 
-    private Vector3 originalPos;
-    private Vector3 openPos;
-    private bool drawerCurrentlyOpen;
-    private bool openningDrawer;
+    private bool drawerOpened;
+    private bool coroutineAllowed;
+    private Vector3 initialPosition;
 
-    private float timer;
     // Start is called before the first frame update
     void Start()
     {
-        timer = Time.time;
-        // initialPosition = transform.position;
-
-        drawerCurrentlyOpen = false;
-
-        originalPos = transform.localPosition;
-
-        openPos = new Vector3(transform.localPosition.x + openDistance,
-            transform.localPosition.y,
-            transform.localPosition.z);
+        drawerOpened = false;
+        coroutineAllowed = true;
+        initialPosition = transform.position;
     }
 
-    void OnMouseDown() 
+    private void OnMouseDown()
     {
-        openningDrawer = true;
+        Invoke("RunCoroutine", 0f);
     }
 
-    void Update()
+    private void RunCoroutine()
     {
-        if (openningDrawer) {
-            if (!drawerCurrentlyOpen) {
-                transform.localPosition = Vector3.Lerp(originalPos, openPos, Time.deltaTime * moveSpeed);
-                drawerCurrentlyOpen = true;
-            } else {
-                transform.localPosition = Vector3.Lerp(openPos, originalPos, Time.deltaTime * moveSpeed);
-                drawerCurrentlyOpen = false;
+        StartCoroutine("OpenThatDoor");
+    }
+
+    private IEnumerator OpenThatDoor()
+    {
+        coroutineAllowed = false;
+        if (!drawerOpened)
+        {
+            for (float i = 0f; i <= openTime; i += openDistance)
+            {
+                transform.localPosition = new Vector3(transform.localPosition.x + openDistance,
+                    transform.localPosition.y,
+                    transform.localPosition.z);
+                yield return new WaitForSeconds(0f);
             }
-            openningDrawer = false;
+            drawerOpened = true;
         }
-
-        // if (timer == Time.deltaTime * moveSpeed) {
-        // }
+        else
+        {
+            for (float i = openTime; i >= 0f; i -= openDistance)
+            {
+                transform.localPosition = new Vector3(transform.localPosition.x - openDistance,
+                    transform.localPosition.y,
+                    transform.localPosition.z);
+                yield return new WaitForSeconds(0f);
+            }
+            transform.position = initialPosition;
+            drawerOpened = false;
+        }
+        coroutineAllowed = true;
     }
 }
+
+// from this https://www.youtube.com/watch?v=Y2zdimfoLxA&ab_channel=AlexanderZotov
