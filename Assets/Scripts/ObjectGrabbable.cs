@@ -1,5 +1,8 @@
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
 
 public class ObjectGrabbable : MonoBehaviour
 {
@@ -7,6 +10,8 @@ public class ObjectGrabbable : MonoBehaviour
     private Rigidbody objectRigidbody;
     private Transform objectGrabPointTransform;
     public float lerpSpeed = 10f;
+
+    public float rotationSpeed = 5f;
 
     public void Awake() {
         objectRigidbody = GetComponent<Rigidbody>();
@@ -26,6 +31,10 @@ public class ObjectGrabbable : MonoBehaviour
         if (objectGrabPointTransform != null) {
             Vector3 newPosition =  Vector3.Lerp(transform.position, objectGrabPointTransform.position, Time.deltaTime * lerpSpeed);
             objectRigidbody.MovePosition(newPosition);
+            objectRigidbody.transform.rotation = Quaternion.Euler(
+                90 + Camera.main.transform.eulerAngles.x, 
+                Camera.main.transform.eulerAngles.y, 
+                0);
         }
     }
 

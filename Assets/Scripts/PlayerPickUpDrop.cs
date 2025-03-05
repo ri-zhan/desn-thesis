@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
 
 public class PickUp : MonoBehaviour
@@ -14,10 +15,10 @@ public class PickUp : MonoBehaviour
 
     public float pickUpDistance = 2f;
 
-
-    // Update is called once per frame
+    public float rotationSpeed = 5f;
 
     private ObjectGrabbable objectGrabbable;
+
 
     private void Update()
     {
@@ -27,8 +28,7 @@ public class PickUp : MonoBehaviour
                 Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickUpDistance, pickUpLayerMask);
                 if (raycastHit.transform.TryGetComponent(out objectGrabbable)) {
                     objectGrabbable.Grab(objectGrabPointTransform);
-                    Debug.Log(objectGrabbable); 
-                }
+                    Debug.Log(objectGrabbable);                 }
             } else {
                 // currently carrying something, drop
                 objectGrabbable.Drop();
