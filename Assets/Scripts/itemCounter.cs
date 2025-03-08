@@ -1,16 +1,36 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro; 
 
 public class itemCounter : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public TMP_Text itemCountText; // UI Text element
+    public int itemCount = 0; // Item count
+
+    private void Start() 
     {
-        
+        itemCount = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void IncrementCount()
     {
-        
+        itemCount++;
+        UpdateText();
+    }
+
+    public void SetCount(int newCount)
+    {
+        itemCount = newCount;
+        UpdateText();
+        Debug.Log(itemCount);
+    }
+
+    private void UpdateText()
+    {
+        // if (itemCountText != null)
+        // {
+            itemCountText.text = itemCount.ToString();
+
+        // }
     }
 }
