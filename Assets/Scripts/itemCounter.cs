@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro; 
 
-public class itemCounter : MonoBehaviour
+public class ItemCounter : MonoBehaviour
+
 {
     public TMP_Text itemCountText; // UI Text element
     public int itemCount = 0; // Item count
@@ -16,21 +17,23 @@ public class itemCounter : MonoBehaviour
     {
         itemCount++;
         UpdateText();
-    }
-
-    public void SetCount(int newCount)
-    {
-        itemCount = newCount;
-        UpdateText();
         Debug.Log(itemCount);
+
     }
 
-    private void UpdateText()
-    {
-        // if (itemCountText != null)
-        // {
-            itemCountText.text = itemCount.ToString();
+    // public void SetCount(int newCount)
+    // {
+    //     itemCount = newCount;
+    //     UpdateText();
+    // }
 
-        // }
+    public void UpdateText()
+    {
+        if (itemCountText != null)
+        {
+            itemCountText.text = itemCount.ToString();
+            Debug.Log(itemCountText);
+
+        }
     }
 }

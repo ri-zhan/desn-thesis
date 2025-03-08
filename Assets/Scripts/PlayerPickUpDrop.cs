@@ -23,8 +23,22 @@ public class PickUp : MonoBehaviour
     private ObjectGrabbable objectGrabbable;
 
     private List<float> photoFrames = new List<float>();
-    private itemCounter itemCounter;
+    private ItemCounter itemCounter;
 
+
+    [SerializeField]
+    public TMP_Text itemCountText; // UI Text element
+
+    [SerializeField]
+    public int itemCount; // Item count
+
+
+    private void Start() 
+    {
+        itemCount = 0;
+        // itemCounter = new ItemCounter();
+        itemCounter = gameObject.AddComponent<ItemCounter>();
+    }
 
     private void Update()
     {
@@ -39,22 +53,22 @@ public class PickUp : MonoBehaviour
                     //         if (other.gameObject.CompareTag("CollectableItem")) // Check if the collided object has the "CollectableItem" tag
                     //         {
 
-                    if (objectGrabbable.tag == "photoFrame") {
+                    // if (objectGrabbable.tag == "photoFrame") {
 
-                        if (photoFrames.Contains(objectGrabbable.GetInstanceID())){
-                            // do nothing
-                        } else {
-                            // add unique id to photoFrame;
-                            photoFrames.Add(objectGrabbable.GetInstanceID());
+                    //     if (photoFrames.Contains(objectGrabbable.GetInstanceID())){
+                    //         // do nothing
+                    //     } else {
+                    //         // add unique id to photoFrame;
+                    //         photoFrames.Add(objectGrabbable.GetInstanceID());
 
-                            // Increment the item counter
-                            // if (itemCounter != null)
-                            // {
-                            itemCounter.IncrementCount();
+                    //         // Increment the item counter
+                    //         // if (itemCounter != null)
+                    //         // {
+                    //         itemCounter.IncrementCount();
                             
-                            // }
-                        }
-                    }
+                    //         // }
+                    //     }
+                    // }
 
 
                     //             // Destroy the collected item
@@ -64,8 +78,12 @@ public class PickUp : MonoBehaviour
 
                     // grab object
                     objectGrabbable.Grab(objectGrabPointTransform);
-                    Debug.Log(objectGrabbable.tag);  
-                    // itemCounter.IncrementCount();                  
+                    // Debug.Log(objectGrabbable.tag);  
+                    if (itemCounter == null) {
+                        Debug.Log("item counter is null");
+                    } else {
+                        itemCounter.IncrementCount();
+                    }
                 }
             } else {
                 // currently carrying something, drop
@@ -74,4 +92,5 @@ public class PickUp : MonoBehaviour
             }
         }
     }
+
 }

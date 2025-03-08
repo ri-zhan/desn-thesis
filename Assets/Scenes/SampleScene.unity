@@ -2625,6 +2625,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 7c9a7b0ef6d6447cbbcb18cd1e9e1577, type: 2}
     - target: {fileID: 8500423294669130701, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: itemCountText
+      value: 
+      objectReference: {fileID: 806513549}
+    - target: {fileID: 8500423294669130701, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: pickUpDistance
       value: 5
       objectReference: {fileID: 0}
@@ -3730,7 +3734,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.558879, y: 0.138479, z: 1.0392531}
   m_Center: {x: 0, y: 0, z: 0}
