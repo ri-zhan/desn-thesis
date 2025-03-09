@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Xml;
 using Mono.Cecil.Cil;
-using TMPro; 
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour
+public class PlayerPickUpDrop : MonoBehaviour
 {
 
     [SerializeField]
@@ -32,21 +33,44 @@ public class PickUp : MonoBehaviour
     [SerializeField]
     public int itemCount; // Item count
 
+    private CaptionDisplay captionDisplay;
+
+    // private GameObject framePickedUp;
+    private Rigidbody objectRigidbody;
+
+    private TMP_Text frameCaption;
+
+    private int frameNum;
+    private string frameNameStr;
+
+    public bool framePickedUp;
 
     private void Start() 
     {
         itemCount = 0;
         // itemCounter = new ItemCounter();
         itemCounter = gameObject.AddComponent<ItemCounter>();
+
+        captionDisplay = gameObject.AddComponent<CaptionDisplay>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E)) {
+
             if (objectGrabbable == null) {
+                framePickedUp = true;
                 // not carrying an object, try to grab
                 Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickUpDistance, pickUpLayerMask);
                 if (raycastHit.transform.TryGetComponent(out objectGrabbable)) {
+                    // framePickedUp = objectGrabbable.gameObject;
+                    // frameCaption = framePickedUp.GetComponentInChildren<TMP_Text>();
+
+                    // captionDisplay.showCaption();
+                    // framePickedUp.GetComponentInChildren<TMP_Text>().enabled = true;
+                    // Debug.Log(framePickedUp);
+                    // Debug.Log(frameCaption);
+                    // captionDisplay.displayText();
 
                     //     void OnTriggerEnter(Collider other)
                     //     {
@@ -84,13 +108,28 @@ public class PickUp : MonoBehaviour
                     } else {
                         itemCounter.IncrementCount();
                     }
+                } else {
+                    framePickedUp = false;   
                 }
             } else {
                 // currently carrying something, drop
                 objectGrabbable.Drop();
                 objectGrabbable = null;
+
+                framePickedUp = false;
             }
         }
     }
 
+    public ObjectGrabbable GetObjectGrabbable() 
+    {
+        Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickUpDistance, pickUpLayerMask);
+
+        if (raycastHit.transform.TryGetComponent(out objectGrabbable)) {
+            // framePickedUp = true;
+            Debug.Log(objectGrabbable);
+            return objectGrabbable;
+        } 
+        return null;
+    }
 }

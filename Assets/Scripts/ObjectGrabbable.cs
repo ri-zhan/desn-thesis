@@ -7,11 +7,14 @@ using UnityEngine.UIElements;
 public class ObjectGrabbable : MonoBehaviour
 {
 
+    [SerializeField] private string objectCaption;
     private Rigidbody objectRigidbody;
     private Transform objectGrabPointTransform;
     public float lerpSpeed = 10f;
 
     public float rotationSpeed = 5f;
+
+    public bool framePickedUp;
 
     public void Awake() {
         objectRigidbody = GetComponent<Rigidbody>();
@@ -36,6 +39,11 @@ public class ObjectGrabbable : MonoBehaviour
                 Camera.main.transform.eulerAngles.y, 
                 0);
         }
+    }
+
+    public string GetObjectCaption() 
+    {
+        return objectCaption;
     }
 
 }
