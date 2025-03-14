@@ -28,15 +28,23 @@ public class PlayerPickUpDrop : MonoBehaviour
             if (objectGrabbable == null) {
                 // not carrying an object, try to grab
                 Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickUpDistance, pickUpLayerMask);
-                Debug.DrawRay(playerCameraTransform.position, playerCameraTransform.forward, Color.red);
                 if (raycastHit.transform.TryGetComponent(out objectGrabbable)) {                    
                     objectGrabbable.Grab(objectGrabPointTransform);
+                    GetObjectGrabbable();
                 }
 
             } else {
                 objectGrabbable.Drop();
                 objectGrabbable = null;
             }
+        }
+    }
+
+    public ObjectGrabbable GetObjectGrabbable() {
+        if (objectGrabbable != null) {                    
+            return objectGrabbable = objectGrabbable.GetComponent<ObjectGrabbable>();
+        } else {
+            return null;
         }
     }
 

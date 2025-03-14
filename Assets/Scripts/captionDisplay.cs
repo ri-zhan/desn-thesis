@@ -25,37 +25,23 @@ public class CaptionDisplay : MonoBehaviour
     [SerializeField] private PlayerPickUpDrop playerPickUpDrop;
     [SerializeField] private TMP_Text objectCaptionTMP;
 
-    private void Start()
+    private void Update()
     {
-        playerPickUpDrop = GetComponent<PlayerPickUpDrop>();
-        // objectGrabbable = gameObject.AddComponent<ObjectGrabbable>();
+        if (playerPickUpDrop.GetObjectGrabbable() != null) {
+            showCaption(playerPickUpDrop.GetObjectGrabbable());
+        } else {
+            hideCaption();
+        }
     }
-
-    // private void Update()
-    // {
-    //     // if (Input.GetKeyDown(KeyCode.E)) {
-    //         if (playerPickUpDrop.GetObjectGrabbable() != null) {
-    //             showCaption(playerPickUpDrop.GetObjectGrabbable());
-    //             // Debug.Log(playerPickUpDrop.GetObjectGrabbable());
-    //         } else {
-    //             hideCaption();
-    //         }
-    //     // }
-    // }
 
     public void showCaption(ObjectGrabbable objectGrabbable) 
     {   
         containerForUI.SetActive(true);
-        // Debug.Log("showing caption");
-        // getFrameNum();
-        // frameCaption.enabled = false;
-        // objectCaptionTMP.text = objectGrabbable.GetObjectCaption();
+        objectCaptionTMP.text = objectGrabbable.GetObjectCaption();
     }
 
     public void hideCaption() 
     {
         containerForUI.SetActive(false);
-        // frameCaption.enabled = false;
-        // frameCaption = null;
     }
 }
