@@ -28,11 +28,11 @@ public class PlayerPickUpDrop : MonoBehaviour
             if (objectGrabbable == null) {
                 // not carrying an object, try to grab
                 Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickUpDistance, pickUpLayerMask);
+
+                // this line is still returning an error when it's null even though it does not have to
                 if (raycastHit.transform.TryGetComponent(out objectGrabbable)) {                    
                     objectGrabbable.Grab(objectGrabPointTransform);
-                    GetObjectGrabbable();
-                }
-
+                } 
             } else {
                 objectGrabbable.Drop();
                 objectGrabbable = null;
