@@ -17,7 +17,6 @@ public class ObjectGrabbable : MonoBehaviour
 
     public float rotationSpeed = 5f;
 
-    public bool framePickedUp;
 
     public void Awake() {
         objectRigidbody = GetComponent<Rigidbody>();
@@ -26,13 +25,11 @@ public class ObjectGrabbable : MonoBehaviour
     public void Grab(Transform objectGrabPointTransform) {
         this.objectGrabPointTransform = objectGrabPointTransform;
         objectRigidbody.useGravity = false;
-        framePickedUp = true;
     }
 
     public void Drop() {
         this.objectGrabPointTransform = null;
         objectRigidbody.useGravity = true;
-        framePickedUp = false;
     }
 
     private void FixedUpdate() {

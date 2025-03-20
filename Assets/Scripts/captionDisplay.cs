@@ -5,20 +5,6 @@ using UnityEngine;
 
 public class CaptionDisplay : MonoBehaviour
 {
-
-
-    // playserInteractUI
-
-    // public bool captionVisible;
-    // public TextMeshProUGUI textDisplay; // UI Text element
-
-    // public string[] captions;
-    // private int index;
-
-    // public float typingSpeed;
-    
-    // public GameObject framePickedUp;
-
     [SerializeField] private GameObject containerForUI;
     // [SerializeField] private Rigidbody ;
     private ObjectGrabbable objectGrabbable;

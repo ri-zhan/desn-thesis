@@ -8,20 +8,13 @@ using UnityEngine.UI;
 
 public class PlayerPickUpDrop : MonoBehaviour
 {
-
-
     [SerializeField] private Transform playerCameraTransform;
-
     [SerializeField] private LayerMask pickUpLayerMask;
-
     [SerializeField] private Transform objectGrabPointTransform;
-
     public float pickUpDistance = 2f;
-
     public float rotationSpeed = 5f;
-
     private ObjectGrabbable objectGrabbable;
-
+    public int itemId;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E)) {
@@ -30,8 +23,14 @@ public class PlayerPickUpDrop : MonoBehaviour
                 Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickUpDistance, pickUpLayerMask);
 
                 // this line is still returning an error when it's null even though it does not have to
-                if (raycastHit.transform.TryGetComponent(out objectGrabbable)) {                    
+                if (raycastHit.transform.TryGetComponent(out objectGrabbable)) {          
                     objectGrabbable.Grab(objectGrabPointTransform);
+                    itemId = objectGrabbable.GetInstanceID();
+                    // Debug.Log(itemCounter.itemIdList);
+                    // Debug.Log(itemCounter.itemIdList);
+                    // itemCounter.itemIdList.Add(itemId);
+                    // if (itemCounter.itemIdList.Contains(itemId) == false) {
+                    // }
                 } 
             } else {
                 objectGrabbable.Drop();
@@ -47,5 +46,4 @@ public class PlayerPickUpDrop : MonoBehaviour
             return null;
         }
     }
-
 }
