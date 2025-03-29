@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - CinemachineTarget
+  - photoFrameVan
+  - photoFrameTor
+  - sceneDoor
   - photoFrame
+  - doorCollider
   layers:
   - Default
   - TransparentFX

@@ -1,27 +1,23 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OpenDoor : MonoBehaviour
 {
 
-    [Header("Movement")]
-    public float openDistance = 45f;
-    public float openTime = 3f;
+    // [Header("Movement")]
+    private float openDistance = 65f;
+    private float openTime = 0.5f;
 
 
     private bool doorOpened;
-    private bool coroutineAllowed;
+    public bool coroutineAllowed;
 
     // Start is called before the first frame update
     void Start()
     {
         doorOpened = false;
         coroutineAllowed = true;
-    }
-
-    private void OnMouseDown()
-    {
-        Invoke("RunCoroutine", 0f);
     }
 
     private void RunCoroutine()

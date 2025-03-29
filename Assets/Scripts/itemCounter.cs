@@ -4,6 +4,7 @@ using Mono.Cecil.Cil;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ItemCounter : MonoBehaviour
@@ -11,15 +12,18 @@ public class ItemCounter : MonoBehaviour
 {
 
     // public string[,] itemIDs;
+    [SerializeField] private SceneChanger sceneChanger;
     [SerializeField] private PlayerPickUpDrop playerPickUpDrop;
+    [SerializeField] private OpenDoor openDoor;
     [SerializeField] private TMP_Text itemCountText;
-    private ObjectGrabbable objectGrabbable;
     [SerializeField] private GameObject containerBig;
+    [SerializeField] private GameObject doorCollider;
+    private ObjectGrabbable objectGrabbable;
+    private List<int> itemIdList = new List<int>();
+    private int itemCount; // Item count
+    private int itemTotal; 
 
-    public List<int> itemIdList = new List<int>();
-    // public TMP_Text itemCountText; // UI Text element
-    public int itemCount; // Item count
-    public int itemTotal;
+
 
     private void Start() 
     {
@@ -28,24 +32,27 @@ public class ItemCounter : MonoBehaviour
     }
 
     private void countItemTotal() {
-
         var go = GameObject.FindGameObjectsWithTag("photoFrame");
         
         for(var i = 0; i < go.Length; i++)
         {
             itemTotal++;
         }
-        Debug.Log(itemTotal);
     }
 
     private void Update()
     {
         if (playerPickUpDrop.GetObjectGrabbable() != null) {
             addToList();
-        } else {
-            // hideCaption();
+        } 
+        if (itemCount == itemTotal) {
+            if (Input.GetMouseButtonDown(0))  {
+                openDoor.Invoke("RunCoroutine", 0f);
+            }
+            doorCollider.SetActive(true);
         }
     }
+
     public void addToList()
     {
         if (itemIdList.Count != (itemTotal)) {
@@ -53,24 +60,11 @@ public class ItemCounter : MonoBehaviour
                 itemIdList.Add(playerPickUpDrop.itemId);
             }
             updateText();
-        } else {
-            Debug.Log("working");
-        }
-
+        } 
     }
 
     private void updateText() {
         itemCount = itemIdList.Count;
         itemCountText.text = itemCount + "/" + itemTotal;
     }
-
-    // public void UpdateText()
-    // {
-    //     if (itemCountText != null)
-    //     {
-    //         itemCountText.text = itemCount.ToString();
-    //         Debug.Log(itemCountText);
-
-    //     }
-    // }
 }
