@@ -12,7 +12,7 @@ public class SceneChanger : MonoBehaviour
     [SerializeField] private ItemCounter itemCounter;
     
     Scene currentScene;
-    string currentSceneName;
+    public string currentSceneName;
     int currentYear;
     int nextYear;
     Scene nextScene;

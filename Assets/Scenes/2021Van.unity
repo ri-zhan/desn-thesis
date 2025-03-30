@@ -532,6 +532,60 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 17.075428, y: 0.36282253, z: 24.312946}
   m_Center: {x: -0.66154575, y: -9.229322, z: -12.156473}
+--- !u!1 &244481878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 244481880}
+  - component: {fileID: 244481879}
+  m_Layer: 0
+  m_Name: sceneUnloader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &244481879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244481878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d496555c3f59c436b92b1f9157bf9835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCounter: {fileID: 1050803402}
+  openDoor: {fileID: 513052451}
+  currentScene:
+    m_Handle: 0
+  currentSceneName: 
+  currentYear: 0
+  previousYear: 0
+  previousScene:
+    m_Handle: 0
+  previousSceneName: 
+--- !u!4 &244481880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244481878}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 184.74927, y: -82.526695, z: 25.626778}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &246788338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,7 +1176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_TagString
-      value: photoFrame
+      value: photoFrameVan
       objectReference: {fileID: 0}
     - target: {fileID: 1853257410289592610, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_Layer
@@ -1295,15 +1349,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1411,7 +1465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_TagString
-      value: photoFrame
+      value: photoFrameVan
       objectReference: {fileID: 0}
     - target: {fileID: 1853257410289592610, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_Layer
@@ -1902,7 +1956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_TagString
-      value: photoFrame
+      value: photoFrameVan
       objectReference: {fileID: 0}
     - target: {fileID: 1853257410289592610, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_Layer
@@ -2282,7 +2336,7 @@ MonoBehaviour:
   openDoor: {fileID: 513052451}
   itemCountText: {fileID: 413227733}
   containerBig: {fileID: 1754429025}
-  doorCollider: {fileID: 1738430685}
+  doorColliderChanger: {fileID: 1738430685}
 --- !u!1 &1095878556 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8762286024517199033, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
@@ -2478,7 +2532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_TagString
-      value: photoFrame
+      value: photoFrameVan
       objectReference: {fileID: 0}
     - target: {fileID: 1853257410289592610, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_Layer
@@ -2716,7 +2770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_TagString
-      value: photoFrame
+      value: photoFrameVan
       objectReference: {fileID: 0}
     - target: {fileID: 1853257410289592610, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_Layer
@@ -2953,8 +3007,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a590292497040ce8569f9074a108d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemCounter: {fileID: 0}
+  itemCounter: {fileID: 1050803402}
+  currentSceneName: 
   nextSceneName: 
+  doorColliderChanger: {fileID: 1738430685}
 --- !u!4 &1347450824
 Transform:
   m_ObjectHideFlags: 0
@@ -3757,8 +3813,8 @@ GameObject:
   - component: {fileID: 1738430687}
   - component: {fileID: 1738430686}
   m_Layer: 0
-  m_Name: doorCollider
-  m_TagString: Untagged
+  m_Name: doorColliderChanger
+  m_TagString: doorColliderChanger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3775,8 +3831,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a590292497040ce8569f9074a108d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemCounter: {fileID: 0}
+  itemCounter: {fileID: 1050803402}
+  currentSceneName: 
   nextSceneName: 
+  doorColliderChanger: {fileID: 1738430685}
 --- !u!65 &1738430687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3820,8 +3878,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4281,7 +4338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_TagString
-      value: photoFrame
+      value: photoFrameVan
       objectReference: {fileID: 0}
     - target: {fileID: 1853257410289592610, guid: ac8c4730ab0cc44d4b824bd3a7921c94, type: 3}
       propertyPath: m_Layer
@@ -5074,6 +5131,7 @@ SceneRoots:
   - {fileID: 1239613493}
   - {fileID: 1154825477}
   - {fileID: 402301301}
+  - {fileID: 244481880}
   - {fileID: 1347450824}
   - {fileID: 1401013724}
   - {fileID: 1738430690}

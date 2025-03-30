@@ -32,7 +32,7 @@ public class ItemCounter : MonoBehaviour
     }
 
     private void countItemTotal() {
-        var go = GameObject.FindGameObjectsWithTag("photoFrame");
+        var go = GameObject.FindGameObjectsWithTag("photoFrameVan");
         
         for(var i = 0; i < go.Length; i++)
         {

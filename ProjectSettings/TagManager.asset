@@ -9,7 +9,8 @@ TagManager:
   - photoFrameTor
   - sceneDoor
   - photoFrame
-  - doorCollider
+  - doorColliderChanger
+  - doorColliderUnloader
   layers:
   - Default
   - TransparentFX
