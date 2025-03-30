@@ -22,7 +22,7 @@ public class ItemCounter : MonoBehaviour
     private List<int> itemIdList = new List<int>();
     private int itemCount; // Item count
     private int itemTotal; 
-
+    public GameObject[] go;
 
 
     private void Start() 
@@ -32,7 +32,11 @@ public class ItemCounter : MonoBehaviour
     }
 
     private void countItemTotal() {
-        var go = GameObject.FindGameObjectsWithTag("photoFrameVan");
+        if ((SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 3)) == "Van") {
+            go = GameObject.FindGameObjectsWithTag("photoFrameVan");
+        } else {
+            go = GameObject.FindGameObjectsWithTag("photoFrameTor");
+        }
         
         for(var i = 0; i < go.Length; i++)
         {
