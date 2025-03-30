@@ -16,8 +16,9 @@ public class SceneChanger : MonoBehaviour
     int currentYear;
     int nextYear;
     Scene nextScene;
-
     public string nextSceneName;
+    public GameObject doorColliderChanger;
+
 
     void Start()
     {

@@ -17,7 +17,7 @@ public class ItemCounter : MonoBehaviour
     [SerializeField] private OpenDoor openDoor;
     [SerializeField] private TMP_Text itemCountText;
     [SerializeField] private GameObject containerBig;
-    [SerializeField] private GameObject doorCollider;
+    [SerializeField] private GameObject doorColliderChanger;
     private ObjectGrabbable objectGrabbable;
     private List<int> itemIdList = new List<int>();
     private int itemCount; // Item count
@@ -49,7 +49,7 @@ public class ItemCounter : MonoBehaviour
             if (Input.GetMouseButtonDown(0))  {
                 openDoor.Invoke("RunCoroutine", 0f);
             }
-            doorCollider.SetActive(true);
+            doorColliderChanger.SetActive(true);
         }
     }
 
