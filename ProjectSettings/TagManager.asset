@@ -7,10 +7,11 @@ TagManager:
   - CinemachineTarget
   - photoFrameVan
   - photoFrameTor
-  - sceneDoor
   - photoFrame
   - doorColliderChanger
   - doorColliderUnloader
+  - MoveObjectsOver
+  - transitionDoor
   layers:
   - Default
   - TransparentFX

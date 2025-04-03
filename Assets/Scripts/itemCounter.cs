@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using Mono.Cecil.Cil;
@@ -10,35 +11,38 @@ using UnityEngine.UI;
 public class ItemCounter : MonoBehaviour
 
 {
-
-    // public string[,] itemIDs;
-    [SerializeField] private SceneChanger sceneChanger;
     [SerializeField] private PlayerPickUpDrop playerPickUpDrop;
     [SerializeField] private OpenDoor openDoor;
     [SerializeField] private TMP_Text itemCountText;
     [SerializeField] private GameObject containerBig;
-    [SerializeField] private GameObject doorColliderChanger;
+    private GameObject doorColliderChanger;
     private ObjectGrabbable objectGrabbable;
-    private List<int> itemIdList = new List<int>();
+    public List<int> itemIdList;
     private int itemCount; // Item count
-    private int itemTotal; 
-    public GameObject[] go;
+    public int itemTotal; 
+    public GameObject[] photoFramesInScene;
 
 
-    private void Start() 
+    private void Awake() 
     {
+        doorColliderChanger = GameObject.FindGameObjectWithTag("doorColliderChanger");
+        doorColliderChanger.SetActive(false);
+
+        // itemIdList.Clear();
+
         countItemTotal();
         updateText();
+        // SceneManager.sceneLoaded
     }
 
-    private void countItemTotal() {
+    public void countItemTotal() {
         if ((SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 3)) == "Van") {
-            go = GameObject.FindGameObjectsWithTag("photoFrameVan");
+            photoFramesInScene = GameObject.FindGameObjectsWithTag("photoFrameVan");
         } else {
-            go = GameObject.FindGameObjectsWithTag("photoFrameTor");
+            photoFramesInScene = GameObject.FindGameObjectsWithTag("photoFrameTor");
         }
         
-        for(var i = 0; i < go.Length; i++)
+        for(var i = 0; i < photoFramesInScene.Length; i++)
         {
             itemTotal++;
         }
@@ -49,12 +53,6 @@ public class ItemCounter : MonoBehaviour
         if (playerPickUpDrop.GetObjectGrabbable() != null) {
             addToList();
         } 
-        if (itemCount == itemTotal) {
-            if (Input.GetMouseButtonDown(0))  {
-                openDoor.Invoke("RunCoroutine", 0f);
-            }
-            doorColliderChanger.SetActive(true);
-        }
     }
 
     public void addToList()
@@ -64,10 +62,13 @@ public class ItemCounter : MonoBehaviour
                 itemIdList.Add(playerPickUpDrop.itemId);
             }
             updateText();
+            if (itemCount == itemTotal) {
+                doorColliderChanger.SetActive(true);
+            }
         } 
     }
 
-    private void updateText() {
+    public void updateText() {
         itemCount = itemIdList.Count;
         itemCountText.text = itemCount + "/" + itemTotal;
     }

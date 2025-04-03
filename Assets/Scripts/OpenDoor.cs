@@ -13,11 +13,18 @@ public class OpenDoor : MonoBehaviour
     private bool doorOpened;
     public bool coroutineAllowed;
 
+
+    private GameObject resetValueObject;
+    private ResetValues resetValues;
+
     // Start is called before the first frame update
     void Start()
     {
         doorOpened = false;
         coroutineAllowed = true;
+
+        resetValueObject = GameObject.Find("activeSceneChanged");
+        resetValues = resetValueObject.GetComponent<ResetValues>();
     }
 
     private void RunCoroutine()
@@ -28,23 +35,21 @@ public class OpenDoor : MonoBehaviour
     private IEnumerator OpenThatDoor()
     {
         coroutineAllowed = false;
-        if (!doorOpened)
-        {
+        if (!doorOpened) {
             for (float i = 0f; i <= openDistance; i += openTime)
             {
                 transform.localRotation = Quaternion.Euler(0f, -i, 0f);
                 yield return new WaitForSeconds(0f);
             }
             doorOpened = true;
-        }
-        else
-        {
+        } else {
             for (float i = openDistance; i >= 0f; i -= openTime)
             {
                 transform.localRotation = Quaternion.Euler(0f, -i, 0f);
                 yield return new WaitForSeconds(0f);
             }
             doorOpened = false;
+            resetValues.Reset();
         }
         coroutineAllowed = true;
     }
